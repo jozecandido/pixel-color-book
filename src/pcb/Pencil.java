@@ -2,7 +2,7 @@ package pcb;
 
 import java.awt.Color;
 
-public class Pencil {
+public class Pencil implements Comparable<Pencil> {
 
 	private int number;
 	private String name;
@@ -31,5 +31,34 @@ public class Pencil {
 	}
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		return this.number == ((Pencil) obj).number;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNumber() + " - " + this.getName() + " - RGB(" + this.getColor().getRed() +
+				", " + this.getColor().getGreen() + ", " + this.getColor().getBlue() + ")";
+	}
+
+	@Override
+	public int compareTo(Pencil o) {
+		final int BEFORE = -1;
+	    final int EQUAL = 0;
+	    final int AFTER = 1;
+	    
+	    if (this.getNumber() > o.getNumber()) {
+	    	return AFTER;
+	    }
+	    if (this.getNumber() < o.getNumber()) {
+	    	return BEFORE;
+	    }
+    	return EQUAL;
 	}
 }

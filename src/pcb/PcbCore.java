@@ -1,6 +1,8 @@
 package pcb;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class PcbCore {
@@ -49,6 +51,8 @@ public class PcbCore {
 		box.add(new Pencil(76, "Marrom", 76, 18, 0));
 		box.add(new Pencil(99, "Preto", 0, 21, 34));
 		
+		Collections.sort(box);
+		
 		return box;
 	}
 	
@@ -73,6 +77,8 @@ public class PcbCore {
 		box.add(new Pencil(91, "Bordô", 154, 64, 64));
 		box.add(new Pencil(97, "Cinza Escuro", 83, 91, 97));
 		box.add(new Pencil(696, "Prata", 167, 169, 171));
+		
+		Collections.sort(box);
 		
 		return box;
 	}
@@ -99,6 +105,8 @@ public class PcbCore {
 		box.add(new Pencil(83, "Marrom Claro", 185, 144, 50));
 		box.add(new Pencil(604, "Ouro", 169, 145, 85));
 		
+		Collections.sort(box);
+
 		return box;
 	}
 	
@@ -124,6 +132,8 @@ public class PcbCore {
 		box.add(new Pencil(68, "Verde Oliva", 44, 72, 40));
 		box.add(new Pencil(81, "Cinza Quente", 129, 128, 115));
 		
+		Collections.sort(box);
+		
 		return box;
 	}
 
@@ -136,10 +146,21 @@ public class PcbCore {
 		List<Pencil> box = new ArrayList<Pencil>();
 
 		box.addAll(create48ColorPencilBox());
+		
+		// Remove 2 pencils
+		Iterator<Pencil> iterator = box.iterator();
+		while (iterator.hasNext()) {
+			Pencil pencil = (Pencil) iterator.next();
+			if (pencil.getNumber() == 77 || pencil.getNumber() == 89) {
+				iterator.remove();
+			}
+		}
+		
 		box.add(new Pencil(8, "Ocre Alaranjado", 224, 134, 26));
 		box.add(new Pencil(19, "Vinho Claro", 162, 100, 110));
 		box.add(new Pencil(20, "Rosa Pétala", 244, 153, 180));
 		box.add(new Pencil(53, "Turquesa Azulado", 0, 128, 190));
+		box.add(new Pencil(86, "Terra", 83, 51, 29));
 		box.add(new Pencil(87, "Ocre Queimado", 200, 129, 101));
 		box.add(new Pencil(96, "Cinza Gelo", 154, 196, 195));
 		box.add(new Pencil(414, "Laranja Neon", 243, 111, 33));
@@ -149,6 +170,8 @@ public class PcbCore {
 		box.add(new Pencil(665, "Verde Metálico", 148, 200, 61));
 		box.add(new Pencil(672, "Lima Metálico", 216, 224, 34));
 		box.add(new Pencil(689, "Bronze", 193, 120, 106));
+		
+		Collections.sort(box);
 		
 		return box;
 	}
