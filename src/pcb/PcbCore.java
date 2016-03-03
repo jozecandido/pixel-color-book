@@ -101,5 +101,55 @@ public class PcbCore {
 		
 		return box;
 	}
+	
+	/**
+	 * Returns list of pencils in the box of 48 color pencil box.
+	 * @return
+	 */
+	public List<Pencil> create48ColorPencilBox() {
 
+		List<Pencil> box = new ArrayList<Pencil>();
+
+		box.addAll(create36ColorPencilBox());
+		box.add(new Pencil(4, "Amarelo Limão", 237, 231, 9));
+		box.add(new Pencil(10, "Areia", 239, 207, 190));
+		box.add(new Pencil(23, "Fúcsia", 166, 43, 71));
+		box.add(new Pencil(31, "Salmão", 242, 112, 89));
+		box.add(new Pencil(35, "Roxo", 43, 40, 111));
+		box.add(new Pencil(38, "Lilás", 151, 107, 174));
+		box.add(new Pencil(39, "Cinza Azulado", 94, 145, 167));
+		box.add(new Pencil(48, "Azul Real", 0, 125, 189));
+		box.add(new Pencil(54, "Azul Claro", 85, 197, 207));
+		box.add(new Pencil(56, "Verde Mar", 0, 124, 107));
+		box.add(new Pencil(68, "Verde Oliva", 44, 72, 40));
+		box.add(new Pencil(81, "Cinza Quente", 129, 128, 115));
+		
+		return box;
+	}
+
+	/**
+	 * Returns list of pencils in the box of 60 color pencil box.
+	 * @return
+	 */
+	public List<Pencil> create60ColorPencilBox() {
+
+		List<Pencil> box = new ArrayList<Pencil>();
+
+		box.addAll(create48ColorPencilBox());
+		box.add(new Pencil(8, "Ocre Alaranjado", 224, 134, 26));
+		box.add(new Pencil(19, "Vinho Claro", 162, 100, 110));
+		box.add(new Pencil(20, "Rosa Pétala", 244, 153, 180));
+		box.add(new Pencil(53, "Turquesa Azulado", 0, 128, 190));
+		box.add(new Pencil(87, "Ocre Queimado", 200, 129, 101));
+		box.add(new Pencil(96, "Cinza Gelo", 154, 196, 195));
+		box.add(new Pencil(414, "Laranja Neon", 243, 111, 33));
+		box.add(new Pencil(427, "Rosa Neon", 239, 80, 128));
+		box.add(new Pencil(638, "Roxo Metálico", 114, 60, 150));
+		box.add(new Pencil(646, "Azul Metálico", 41, 54, 144));
+		box.add(new Pencil(665, "Verde Metálico", 148, 200, 61));
+		box.add(new Pencil(672, "Lima Metálico", 216, 224, 34));
+		box.add(new Pencil(689, "Bronze", 193, 120, 106));
+		
+		return box;
+	}
 }
