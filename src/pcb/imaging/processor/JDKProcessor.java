@@ -15,12 +15,12 @@ import pcb.model.PaintSize;
 
 class JDKProcessor extends AbstractImageProcessor {
 
-	BufferedImage buffImage = null;
+	BufferedImage originalImage = null;
 	
 	@Override
 	void preProcess() {
 		try {
-			buffImage = ImageIO.read(imageFile);
+			originalImage = ImageIO.read(imageFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -28,8 +28,8 @@ class JDKProcessor extends AbstractImageProcessor {
 
 	@Override
 	String resize() {
-		int originalWidth = buffImage.getWidth();
-		int originalHeight = buffImage.getHeight();
+		int originalWidth = originalImage.getWidth();
+		int originalHeight = originalImage.getHeight();
 		
 		double paintSizeRatio = (double) paintSize.getHeight() / paintSize.getWidth();
 		double originalRatio = 0;
@@ -58,8 +58,8 @@ class JDKProcessor extends AbstractImageProcessor {
 			}
 		}
 		
-		int type = buffImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : buffImage.getType();
-		BufferedImage resizedImage = resizeImage(buffImage, type, newWidth, newHeight);
+		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+		BufferedImage resizedImage = resizeImage(originalImage, type, newWidth, newHeight);
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
