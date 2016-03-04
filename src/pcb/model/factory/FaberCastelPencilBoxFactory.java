@@ -1,17 +1,48 @@
-package pcb;
+package pcb.model.factory;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public final class ColorPencilBox {
+import pcb.exception.BoxSizeException;
+import pcb.model.ColorPencilBox;
+import pcb.model.Pencil;
+import pcb.model.PencilBrand;
 
+class FaberCastelPencilBoxFactory {
+	
+	public static ColorPencilBox createColorPencilBox(int size) throws BoxSizeException {
+		List<Pencil> pencils = null;
+		
+		switch (size) {
+		case 12:
+			pencils = create12ColorPencilBox();
+			break;
+		case 24:
+			pencils = create24ColorPencilBox();
+			break;
+		case 36:
+			pencils = create36ColorPencilBox();
+			break;
+		case 48:
+			pencils = create48ColorPencilBox();
+			break;
+		case 60:
+			pencils = create60ColorPencilBox();
+			break;
+		default:
+			throw new BoxSizeException();
+		}
+		
+		return new ColorPencilBox(PencilBrand.FaberCastel, pencils);
+	}
+	
 	/**
 	 * Returns a sorted list of pencils in the box of 12 color pencil box.
 	 * @return
 	 */
-	public static List<Pencil> create12ColorPencilBox() {
+	private static List<Pencil> create12ColorPencilBox() {
 
 		List<Pencil> box = new ArrayList<Pencil>();
 
@@ -37,7 +68,7 @@ public final class ColorPencilBox {
 	 * Returns a sorted list of pencils in the box of 24 color pencil box.
 	 * @return
 	 */
-	public static List<Pencil> create24ColorPencilBox() {
+	private static List<Pencil> create24ColorPencilBox() {
 
 		List<Pencil> box = new ArrayList<Pencil>();
 
@@ -64,7 +95,7 @@ public final class ColorPencilBox {
 	 * Returns a sorted list of pencils in the box of 36 color pencil box.
 	 * @return
 	 */
-	public static List<Pencil> create36ColorPencilBox() {
+	private static List<Pencil> create36ColorPencilBox() {
 
 		List<Pencil> box = new ArrayList<Pencil>();
 
@@ -91,7 +122,7 @@ public final class ColorPencilBox {
 	 * Returns a sorted list of pencils in the box of 48 color pencil box.
 	 * @return 
 	 */
-	public static List<Pencil> create48ColorPencilBox() {
+	private static List<Pencil> create48ColorPencilBox() {
 
 		List<Pencil> box = new ArrayList<Pencil>();
 
@@ -118,7 +149,7 @@ public final class ColorPencilBox {
 	 * Returns list of pencils in the box of 60 color pencil box.
 	 * @return
 	 */
-	public static List<Pencil> create60ColorPencilBox() {
+	private static List<Pencil> create60ColorPencilBox() {
 
 		List<Pencil> box = new ArrayList<Pencil>();
 

@@ -1,21 +1,70 @@
 package pcb;
 
 import java.awt.Color;
-import java.util.List;
+import java.io.File;
+
+import pcb.exception.BoxSizeException;
+import pcb.exception.NoPencilBrandException;
+import pcb.imaging.processor.ColorImageMappingProcessor;
+import pcb.model.ColorPencilBox;
+import pcb.model.PaintMode;
+import pcb.model.PencilBrand;
+import pcb.model.factory.ColorPencilBoxFactory;
 
 public class PcbCore {
+	
+	public void createDrawing(File image, PaintMode mode, int boxSize, PencilBrand brand) {
+
+		try {
+			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
+			ColorImageMappingProcessor.getCurrentProcessor().processImage(image, 50, 72);
+		} catch (NoPencilBrandException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BoxSizeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		System.out.println("inicio");
+		String pathImage = "res/test.jpg";
+		String mode = "Hard";
+		String brand = "FaberCastel";
+		String size = "12";
+		
+		
+		if(args != null) {
+			switch(args.length) {
+				case 4:
+					size = args[3];
+				case 3:
+					brand = args[2];
+				case 2:
+					mode = args[1];
+				case 1: 
+					pathImage = args[0];
+				default:
+					break;
+					
+			}
+		}
+		
+		new PcbCore().createDrawing(new File(pathImage),
+				PaintMode.valueOf(mode), 
+				Integer.parseInt(size),
+				PencilBrand.valueOf(brand));
+		
 		
 		// [DONE] Definir mapa de cores
 		// [DONE] Definir conjunto de lapis
-		List<Pencil> box60 = ColorPencilBox.create60ColorPencilBox();
+		
 		
 		//INPUT
-		//TODO: receber arquivo imagem
-		//TODO: receber TAMANHO
-		//TODO: receber conjunto de lápis 
+		//DONE: receber arquivo imagem
+		//DONE: receber TAMANHO
+		//DONE: receber conjunto de lápis 
 		
 		//PRE-PROCESSAMENTO
 		//TODO: processar stream?

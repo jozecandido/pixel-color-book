@@ -1,4 +1,4 @@
-package pcb;
+package pcb.model;
 
 import java.awt.Color;
 
