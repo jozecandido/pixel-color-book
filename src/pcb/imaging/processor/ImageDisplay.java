@@ -6,10 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class ImageDisplay extends Component {
@@ -22,12 +19,8 @@ public class ImageDisplay extends Component {
 		g.drawImage(img, 0, 0, null);
 	}
 
-	public ImageDisplay(File imageFile) {
-		try {
-			img = ImageIO.read(imageFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public ImageDisplay(BufferedImage bufferedImage) {
+		img = bufferedImage;
 	}
 
 	public Dimension getPreferredSize() {

@@ -4,6 +4,7 @@ import java.io.File;
 
 import pcb.exception.BoxSizeException;
 import pcb.exception.NoPencilBrandException;
+import pcb.imaging.ColorImageMapping;
 import pcb.imaging.processor.ColorImageMappingProcessor;
 import pcb.imaging.processor.ImageProcessor;
 import pcb.model.ColorPencilBox;
@@ -41,8 +42,8 @@ public class PcbCore {
 		try {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
 			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
-			processor.processImage(image, box, paintSize);
-			processor.displayImage(image);
+			ColorImageMapping mapping = processor.processImage(image, box, paintSize);
+			processor.displayImage(mapping.getResizedImage());
 			
 		} catch (NoPencilBrandException e) {
 			e.printStackTrace();
@@ -57,7 +58,7 @@ public class PcbCore {
 		String pathImage = "res/sample1.jpg";
 		String paintSize = "LARGE";
 		String brand = "FaberCastell";
-		String pencilBoxSize = "12";
+		String pencilBoxSize = "60";
 		
 		if(args != null) {
 			switch(args.length) {

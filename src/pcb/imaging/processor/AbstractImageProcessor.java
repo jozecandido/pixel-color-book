@@ -1,6 +1,10 @@
 package pcb.imaging.processor;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import pcb.imaging.ColorImageMapping;
 import pcb.model.ColorPencilBox;
@@ -9,21 +13,26 @@ import pcb.model.PaintSize;
 public abstract class AbstractImageProcessor implements ImageProcessor{
 		
 	@Override
-	public ColorImageMapping processImage(File image, ColorPencilBox pencilBox, PaintSize paintSize) {
+	public ColorImageMapping processImage(File imageFile, ColorPencilBox pencilBox, PaintSize paintSize) {
+		
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(imageFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		preProcess();
-		adjustHue();
-		adjustSaturation();
-		resize();
-		return createColorMapping();
+		adjustContrastAndSaturation();
+		BufferedImage resizedImage = resize(image, paintSize);
+		return createColorMapping(resizedImage);
 	}
 	
 	abstract void preProcess();
 
-	abstract void resize();
+	abstract BufferedImage resize(BufferedImage image, PaintSize paintSize);
 
-	abstract void adjustHue();
-
-	abstract void adjustSaturation();
+	abstract void adjustContrastAndSaturation();
 	
-	abstract ColorImageMapping createColorMapping();
+	abstract ColorImageMapping createColorMapping(BufferedImage resizedImage);
 }
