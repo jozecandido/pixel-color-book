@@ -1,19 +1,15 @@
 package pcb.model;
 
-/**
- * The paint mode determines the size of the drawing. 
- *
- */
-public enum PaintMode {
+public enum PaintSize {
 	
-	EASY(21, 31),
+	SMALL(21, 31),
 	MEDIUM(36, 53),
-	ADVANCED(50, 72);
+	LARGE(50, 72);
 
-	private int height;
 	private int width;
+	private int height;
 	
-	private PaintMode(int width, int height) {
+	private PaintSize(int width, int height) {
 		this.setHeight(height);
 		this.setWidth(width);
 	}

@@ -8,13 +8,13 @@ import pcb.exception.NoPencilBrandException;
 import pcb.imaging.processor.ColorImageMappingProcessor;
 import pcb.imaging.processor.ImageProcessor;
 import pcb.model.ColorPencilBox;
-import pcb.model.PaintMode;
+import pcb.model.PaintSize;
 import pcb.model.PencilBrand;
 import pcb.model.factory.ColorPencilBoxFactory;
 
 public class PcbCore {
 	
-	public void createDrawing(File image, PaintMode mode, int boxSize, PencilBrand brand) {
+	public void createDrawing(File image, PaintSize paintSize, int boxSize, PencilBrand brand) {
 
 		try {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
@@ -33,18 +33,18 @@ public class PcbCore {
 		System.out.println("inicio");
 		
 		String pathImage = "res/sample1.jpg";
-		String mode = "ADVANCED";
+		String paintSize = "LARGE";
 		String brand = "FaberCastell";
-		String size = "12";
+		String pencilBoxSize = "12";
 		
 		if(args != null) {
 			switch(args.length) {
 				case 4:
-					size = args[3];
+					pencilBoxSize = args[3];
 				case 3:
 					brand = args[2];
 				case 2:
-					mode = args[1];
+					paintSize = args[1];
 				case 1: 
 					pathImage = args[0];
 				default:
@@ -53,8 +53,8 @@ public class PcbCore {
 		}
 		
 		new PcbCore().createDrawing(new File(pathImage),
-				PaintMode.valueOf(mode), 
-				Integer.parseInt(size),
+				PaintSize.valueOf(paintSize), 
+				Integer.parseInt(pencilBoxSize),
 				PencilBrand.valueOf(brand));
 		
 		//DONE: Definir mapa de cores
