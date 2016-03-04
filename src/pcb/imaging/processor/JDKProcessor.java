@@ -3,21 +3,33 @@ package pcb.imaging.processor;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
+
+import javax.imageio.ImageIO;
 
 import pcb.imaging.ColorImageMapping;
 import pcb.model.PaintSize;
 
 class JDKProcessor extends AbstractImageProcessor {
 
+	BufferedImage buffImage = null;
+	
 	@Override
 	void preProcess() {
-		// TODO Auto-generated method stub
+		try {
+			buffImage = ImageIO.read(imageFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	BufferedImage resize(BufferedImage originalImage, PaintSize paintSize) {
-		int originalWidth = originalImage.getWidth();
-		int originalHeight = originalImage.getHeight();
+	String resize() {
+		int originalWidth = buffImage.getWidth();
+		int originalHeight = buffImage.getHeight();
 		
 		double paintSizeRatio = (double) paintSize.getHeight() / paintSize.getWidth();
 		double originalRatio = 0;
@@ -46,10 +58,19 @@ class JDKProcessor extends AbstractImageProcessor {
 			}
 		}
 		
-		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-		BufferedImage resizedImage = resizeImage(originalImage, type, newWidth, newHeight);
+		int type = buffImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : buffImage.getType();
+		BufferedImage resizedImage = resizeImage(buffImage, type, newWidth, newHeight);
 		
-		return resizedImage;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
+			ImageIO.write(resizedImage, "jpg", baos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		byte[] bytes = baos.toByteArray();
+		
+		return Base64.getEncoder().encodeToString(bytes);
 	}
 	
 	private BufferedImage resizeImage(BufferedImage originalImage, int type, int width, int height){
@@ -73,7 +94,7 @@ class JDKProcessor extends AbstractImageProcessor {
 	}
 
 	@Override
-	ColorImageMapping createColorMapping(BufferedImage resizedImage, BufferedImage userImage) {
+	ColorImageMapping createColorMapping() {
 		return new ColorImageMapping(resizedImage, userImage);
 	}
 

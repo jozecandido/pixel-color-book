@@ -12,29 +12,29 @@ import pcb.model.PaintSize;
 
 public abstract class AbstractImageProcessor implements ImageProcessor{
 		
+	File imageFile;
+	ColorPencilBox pencilBox;
+	PaintSize paintSize;
+	
 	@Override
 	public ColorImageMapping processImage(File imageFile, ColorPencilBox pencilBox, PaintSize paintSize) {
-		
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(imageFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		this.imageFile = imageFile;
+		this.pencilBox = pencilBox;
+		this.paintSize = paintSize;
 		preProcess();
 		adjustContrastAndSaturation();
-		BufferedImage resizedImage = resize(image, paintSize);
-		BufferedImage userImage = resize(resizedImage, PaintSize.USER);
-		
-		return createColorMapping(resizedImage, userImage);
+		resize();
+		genaretePreview();
+		return createColorMapping();
 	}
 	
 	abstract void preProcess();
 
-	abstract BufferedImage resize(BufferedImage image, PaintSize paintSize);
+	abstract String resize();
 
 	abstract void adjustContrastAndSaturation();
 	
-	abstract ColorImageMapping createColorMapping(BufferedImage resizedImage, BufferedImage userImage);
+	abstract void generatePreview();
+	
+	abstract ColorImageMapping createColorMapping();
 }
