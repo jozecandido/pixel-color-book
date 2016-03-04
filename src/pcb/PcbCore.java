@@ -1,6 +1,5 @@
 package pcb;
 
-import java.awt.Color;
 import java.io.File;
 
 import pcb.exception.BoxSizeException;
@@ -42,7 +41,7 @@ public class PcbCore {
 		try {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
 			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
-			processor.processImage(image, 50, 72);
+			processor.processImage(image, box, paintSize);
 			processor.displayImage(image);
 			
 		} catch (NoPencilBrandException e) {
