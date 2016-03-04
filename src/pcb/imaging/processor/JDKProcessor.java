@@ -9,25 +9,21 @@ class JDKProcessor extends AbstractImageProcessor {
 	@Override
 	void preProcess() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	void resize() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	void adjustHue() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	void adjustSaturation() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -35,6 +31,10 @@ class JDKProcessor extends AbstractImageProcessor {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
+	@Override
+	public void displayImage(File imageFile) {
+		ImageDisplay display = new ImageDisplay(imageFile);
+		display.display();
+	}
 }

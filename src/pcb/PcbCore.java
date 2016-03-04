@@ -6,6 +6,7 @@ import java.io.File;
 import pcb.exception.BoxSizeException;
 import pcb.exception.NoPencilBrandException;
 import pcb.imaging.processor.ColorImageMappingProcessor;
+import pcb.imaging.processor.ImageProcessor;
 import pcb.model.ColorPencilBox;
 import pcb.model.PaintMode;
 import pcb.model.PencilBrand;
@@ -17,23 +18,24 @@ public class PcbCore {
 
 		try {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
-			ColorImageMappingProcessor.getCurrentProcessor().processImage(image, 50, 72);
+			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
+			processor.processImage(image, 50, 72);
+			processor.displayImage(image);
+			
 		} catch (NoPencilBrandException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BoxSizeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
 		System.out.println("inicio");
+		
 		String pathImage = "res/sample1.jpg";
-		String mode = "Hard";
+		String mode = "ADVANCED";
 		String brand = "FaberCastell";
 		String size = "12";
-		
 		
 		if(args != null) {
 			switch(args.length) {
@@ -47,7 +49,6 @@ public class PcbCore {
 					pathImage = args[0];
 				default:
 					break;
-					
 			}
 		}
 		
@@ -56,14 +57,13 @@ public class PcbCore {
 				Integer.parseInt(size),
 				PencilBrand.valueOf(brand));
 		
-		
-		// [DONE] Definir mapa de cores
-		// [DONE] Definir conjunto de lapis
+		//DONE: Definir mapa de cores
+		//DONE: Definir conjunto de lapis
 		
 		//INPUT
-		//DONE: receber arquivo imagem
-		//DONE: receber TAMANHO
-		//DONE: receber conjunto de lápis 
+		//DONE: Receber arquivo imagem
+		//DONE: Receber TAMANHO
+		//DONE: Receber conjunto de lápis 
 		
 		//PRE-PROCESSAMENTO
 		//TODO: processar stream?
@@ -73,10 +73,11 @@ public class PcbCore {
 		//PROCESSAMENTO
 		//TODO: ?? Traduzir mapa de cores para byte|rgb|o que for ??
 		//TODO: Mapear pixels da imagem
-		//TODO: Mapear pixel para lápis sqrt( (R1-R2)ˆ2 + (G1-G2)ˆ2 + (B1-B2)ˆ2) (implementado abaixo) 
+		//TODO: Mapear pixel para lápis sqrt( (R1-R2)ˆ2 + (G1-G2)ˆ2 + (B1-B2)ˆ2) (implementado abaixo)
 		//TODO: Gerar tabela mapeada
 		
 		//POS-PROCESSAMENTO | OUTPUT
+		//DONE: Exibir imagem
 		//TODO: Gerar PDF		
 	}
 	

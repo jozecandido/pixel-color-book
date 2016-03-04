@@ -6,4 +6,6 @@ import pcb.imaging.ColorImageMapping;
 
 public interface ImageProcessor {
 	public ColorImageMapping processImage(File image, int height, int width);
+
+	public void displayImage(File image);
 }
