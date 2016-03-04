@@ -11,6 +11,7 @@ import pcb.model.ColorPencilBox;
 import pcb.model.PaintSize;
 import pcb.model.PencilBrand;
 import pcb.model.factory.ColorPencilBoxFactory;
+import pcb.util.ImageDisplay;
 
 public class PcbCore {
 	
@@ -43,7 +44,7 @@ public class PcbCore {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
 			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
 			ColorImageMapping mapping = processor.processImage(image, box, paintSize);
-			processor.displayImage(mapping.getUserImage());
+			ImageDisplay.displayImage(mapping.getUserImage());
 			
 		} catch (NoPencilBrandException e) {
 			e.printStackTrace();

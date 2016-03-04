@@ -77,12 +77,6 @@ class JDKProcessor extends AbstractImageProcessor {
 		return new ColorImageMapping(resizedImage, userImage);
 	}
 
-	@Override
-	public void displayImage(BufferedImage bufferedImage) {
-		ImageDisplay display = new ImageDisplay(bufferedImage);
-		display.display();
-	}
-
 	@SuppressWarnings("unused")
 	private double distanceTo(Color pixelColor, Color pencilColor) {
 		double redDistance = pixelColor.getRed() - pencilColor.getRed();

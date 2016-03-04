@@ -1,4 +1,4 @@
-package pcb.imaging.processor;
+package pcb.util;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -43,5 +43,10 @@ public class ImageDisplay extends Component {
 		f.add(this);
 		f.pack();
 		f.setVisible(true);
+	}
+	
+	public static void displayImage(BufferedImage bufferedImage) {
+		ImageDisplay display = new ImageDisplay(bufferedImage);
+		display.display();
 	}
 }
