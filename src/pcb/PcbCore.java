@@ -60,7 +60,6 @@ public class PcbCore {
 		// [DONE] Definir mapa de cores
 		// [DONE] Definir conjunto de lapis
 		
-		
 		//INPUT
 		//DONE: receber arquivo imagem
 		//DONE: receber TAMANHO
@@ -69,7 +68,7 @@ public class PcbCore {
 		//PRE-PROCESSAMENTO
 		//TODO: processar stream?
 		//TODO: Mudar contraste e saturação
-		//TODO: redimensionar para tamanhos (Fácil: 21x31, Médio: 36x53 e Avançado: 50x72)
+		//TODO: redimensionar para tamanhos 
 		
 		//PROCESSAMENTO
 		//TODO: ?? Traduzir mapa de cores para byte|rgb|o que for ??
