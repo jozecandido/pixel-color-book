@@ -9,7 +9,7 @@ public class ColorPencilBox {
 	private List<Pencil> pencils;
 	
 	public ColorPencilBox()	{
-		brand = PencilBrand.FaberCastel;
+		brand = PencilBrand.FaberCastell;
 		pencils = new ArrayList<Pencil>();
 	}
 	

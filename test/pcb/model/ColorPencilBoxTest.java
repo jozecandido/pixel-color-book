@@ -1,4 +1,4 @@
-package pcb;
+package pcb.model;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,7 +15,7 @@ public class ColorPencilBoxTest {
 	@Test
 	public void testcreate12ColorPencilBox() throws NoPencilBrandException, BoxSizeException {
 		System.out.println("********* 12 Color Pencil Box *********");
-		ColorPencilBox box = ColorPencilBoxFactory.createBox(12, PencilBrand.FaberCastel);
+		ColorPencilBox box = ColorPencilBoxFactory.createBox(12, PencilBrand.FaberCastell);
 		for (Pencil pencil : box.getPencils()) {
 			System.out.println(pencil.toString());
 		}
@@ -25,7 +25,7 @@ public class ColorPencilBoxTest {
 	@Test
 	public void testcreate24ColorPencilBox() throws NoPencilBrandException, BoxSizeException {
 		System.out.println("********* 24 Color Pencil Box *********");
-		ColorPencilBox box = ColorPencilBoxFactory.createBox(24, PencilBrand.FaberCastel);
+		ColorPencilBox box = ColorPencilBoxFactory.createBox(24, PencilBrand.FaberCastell);
 		for (Pencil pencil : box.getPencils()) {
 			System.out.println(pencil.toString());
 		}
@@ -35,7 +35,7 @@ public class ColorPencilBoxTest {
 	@Test
 	public void testcreate36ColorPencilBox() throws NoPencilBrandException, BoxSizeException {
 		System.out.println("********* 36 Color Pencil Box *********");
-		ColorPencilBox box = ColorPencilBoxFactory.createBox(36, PencilBrand.FaberCastel);
+		ColorPencilBox box = ColorPencilBoxFactory.createBox(36, PencilBrand.FaberCastell);
 		for (Pencil pencil : box.getPencils()) {
 			System.out.println(pencil.toString());
 		}
@@ -45,7 +45,7 @@ public class ColorPencilBoxTest {
 	@Test
 	public void testcreate48ColorPencilBox() throws NoPencilBrandException, BoxSizeException {
 		System.out.println("********* 48 Color Pencil Box *********");
-		ColorPencilBox box = ColorPencilBoxFactory.createBox(48, PencilBrand.FaberCastel);
+		ColorPencilBox box = ColorPencilBoxFactory.createBox(48, PencilBrand.FaberCastell);
 		for (Pencil pencil : box.getPencils()) {
 			System.out.println(pencil.toString());
 		}
@@ -55,7 +55,7 @@ public class ColorPencilBoxTest {
 	@Test
 	public void testcreate60ColorPencilBox() throws NoPencilBrandException, BoxSizeException {
 		System.out.println("********* 60 Color Pencil Box *********");
-		ColorPencilBox box = ColorPencilBoxFactory.createBox(60, PencilBrand.FaberCastel);
+		ColorPencilBox box = ColorPencilBoxFactory.createBox(60, PencilBrand.FaberCastell);
 		for (Pencil pencil : box.getPencils()) {
 			System.out.println(pencil.toString());
 		}
@@ -65,7 +65,7 @@ public class ColorPencilBoxTest {
 	@Test(expected=BoxSizeException.class)
 	public void testthrowBoxSizeException() throws NoPencilBrandException, BoxSizeException {
 		System.out.println("********* BoxSizeException *********");
-		ColorPencilBox box = ColorPencilBoxFactory.createBox(72, PencilBrand.FaberCastel);
+		ColorPencilBox box = ColorPencilBoxFactory.createBox(72, PencilBrand.FaberCastell);
 		Assert.assertEquals(box.getSize(), 60);
 	}
 	

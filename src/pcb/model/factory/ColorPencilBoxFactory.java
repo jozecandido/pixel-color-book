@@ -9,7 +9,7 @@ public final class ColorPencilBoxFactory {
 
 	public static ColorPencilBox createBox(int size, PencilBrand brand) throws NoPencilBrandException, BoxSizeException {
 		switch(brand) {
-			case FaberCastel:
+			case FaberCastell:
 				return FaberCastelPencilBoxFactory.createColorPencilBox(size);
 			default:
 				throw new NoPencilBrandException();

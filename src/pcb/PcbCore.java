@@ -29,9 +29,9 @@ public class PcbCore {
 
 	public static void main(String[] args) {
 		System.out.println("inicio");
-		String pathImage = "res/test.jpg";
+		String pathImage = "res/sample1.jpg";
 		String mode = "Hard";
-		String brand = "FaberCastel";
+		String brand = "FaberCastell";
 		String size = "12";
 		
 		

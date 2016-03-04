@@ -35,7 +35,7 @@ class FaberCastelPencilBoxFactory {
 			throw new BoxSizeException();
 		}
 		
-		return new ColorPencilBox(PencilBrand.FaberCastel, pencils);
+		return new ColorPencilBox(PencilBrand.FaberCastell, pencils);
 	}
 	
 	/**
