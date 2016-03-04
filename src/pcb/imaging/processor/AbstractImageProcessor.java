@@ -25,7 +25,9 @@ public abstract class AbstractImageProcessor implements ImageProcessor{
 		preProcess();
 		adjustContrastAndSaturation();
 		BufferedImage resizedImage = resize(image, paintSize);
-		return createColorMapping(resizedImage);
+		BufferedImage userImage = resize(resizedImage, PaintSize.USER);
+		
+		return createColorMapping(resizedImage, userImage);
 	}
 	
 	abstract void preProcess();
@@ -34,5 +36,5 @@ public abstract class AbstractImageProcessor implements ImageProcessor{
 
 	abstract void adjustContrastAndSaturation();
 	
-	abstract ColorImageMapping createColorMapping(BufferedImage resizedImage);
+	abstract ColorImageMapping createColorMapping(BufferedImage resizedImage, BufferedImage userImage);
 }

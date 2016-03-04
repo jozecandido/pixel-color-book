@@ -73,8 +73,8 @@ class JDKProcessor extends AbstractImageProcessor {
 	}
 
 	@Override
-	ColorImageMapping createColorMapping(BufferedImage resizedImage) {
-		return new ColorImageMapping(resizedImage);
+	ColorImageMapping createColorMapping(BufferedImage resizedImage, BufferedImage userImage) {
+		return new ColorImageMapping(resizedImage, userImage);
 	}
 
 	@Override

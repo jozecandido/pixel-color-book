@@ -25,7 +25,7 @@ public class PcbCore {
 	//PRE-PROCESSAMENTO
 	//TODO: processar stream?
 	//TODO: Mudar contraste e saturação
-	//TODO: redimensionar para tamanhos 
+	//DONE: redimensionar para tamanhos 
 	
 	//PROCESSAMENTO
 	//TODO: ?? Traduzir mapa de cores para byte|rgb|o que for ??
@@ -43,7 +43,7 @@ public class PcbCore {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
 			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
 			ColorImageMapping mapping = processor.processImage(image, box, paintSize);
-			processor.displayImage(mapping.getResizedImage());
+			processor.displayImage(mapping.getUserImage());
 			
 		} catch (NoPencilBrandException e) {
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class PcbCore {
 	public static void main(String[] args) {
 		System.out.println("inicio");
 		
-		String pathImage = "res/sample1.jpg";
+		String pathImage = "res/sample2.jpg";
 		String paintSize = "LARGE";
 		String brand = "FaberCastell";
 		String pencilBoxSize = "60";

@@ -4,7 +4,8 @@ public enum PaintSize {
 	
 	SMALL(21, 31),
 	MEDIUM(36, 53),
-	LARGE(50, 72);
+	LARGE(50, 72),
+	USER(800, 800);
 
 	private int width;
 	private int height;
