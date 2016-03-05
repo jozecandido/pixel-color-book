@@ -59,31 +59,10 @@ public class PcbCore {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("inicio");
-		
-		String pathImage = "res/sample2.jpg";
-		String paintSize = "LARGE";
-		String brand = "FaberCastell";
-		String pencilBoxSize = "60";
-		
-		if(args != null) {
-			switch(args.length) {
-				case 4:
-					pencilBoxSize = args[3];
-				case 3:
-					brand = args[2];
-				case 2:
-					paintSize = args[1];
-				case 1: 
-					pathImage = args[0];
-				default:
-					break;
-			}
-		}
-		
-		new PcbCore().createDrawing(new File(pathImage),
-				DefaultImageSize.valueOf(paintSize), 
-				Integer.parseInt(pencilBoxSize),
-				PencilBrand.valueOf(brand));
+		new PcbCore().createDrawing(
+				new File("res/sample2.jpg"), 
+				DefaultImageSize.LARGE, 
+				60, 
+				PencilBrand.FaberCastell);
 	}
 }
