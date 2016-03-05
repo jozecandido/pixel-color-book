@@ -17,6 +17,7 @@ class JDKProcessor extends AbstractImageProcessor {
 
 	BufferedImage buffImage = null;
 	BufferedImage resizedImage = null;
+	
 	@Override
 	void preProcess() throws IOException {
 		buffImage = ImageIO.read(new ByteArrayInputStream(imageFile));
@@ -25,15 +26,13 @@ class JDKProcessor extends AbstractImageProcessor {
 	@Override
 	void resize() {
 		
-		ImageSize newSize = Common.calculateNewSize(buffImage.getWidth(), buffImage.getHeight(), paintSize);
+		ImageSize newSize = Common.calculateNewSize(new ImageSize(buffImage.getWidth(), buffImage.getHeight()), paintSize);
 		
-		int width = newSize.getWidth();
-		int height = newSize.getHeight();
 		int type = buffImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : buffImage.getType();		
 				
-		resizedImage = new BufferedImage(width, height, type);
+		resizedImage = new BufferedImage(newSize.getWidth(), newSize.getHeight(), type);
 		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(buffImage, 0, 0, width, height, null);
+		g.drawImage(buffImage, 0, 0, newSize.getWidth(), newSize.getHeight(), null);
 		g.dispose();
 	}
 

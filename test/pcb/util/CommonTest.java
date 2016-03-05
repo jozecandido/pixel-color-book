@@ -26,14 +26,16 @@ public class CommonTest {
 	}
 
 	@Test
-	public void testCalculateNewSizePortrait() {		
-		ImageSize size = Common.calculateNewSize(1080, 1806, DefaultImageSize.LARGE.getSize());
+	public void testCalculateNewSizePortrait() {
+		ImageSize originalSize = new ImageSize(1080, 1806);
+		ImageSize size = Common.calculateNewSize(originalSize, DefaultImageSize.LARGE.getSize());
 		Assert.assertEquals(size.getHeight(), DefaultImageSize.LARGE.getSize().getHeight());
 	}
 	
 	@Test
-	public void testCalculateNewSizeLandscape() {		
-		ImageSize size = Common.calculateNewSize(1806, 1080, DefaultImageSize.LARGE.getSize());
+	public void testCalculateNewSizeLandscape() {
+		ImageSize originalSize = new ImageSize(1806, 1080);
+		ImageSize size = Common.calculateNewSize(originalSize, DefaultImageSize.LARGE.getSize());
 		Assert.assertEquals(size.getWidth(), DefaultImageSize.LARGE.getSize().getHeight());
 	}
 

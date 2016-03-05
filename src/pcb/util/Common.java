@@ -35,10 +35,12 @@ public final class Common {
 		return byteArray;
 	}
 	
-	public static ImageSize calculateNewSize(int originalWidth, int originalHeight, ImageSize newSize) {
+	public static ImageSize calculateNewSize(ImageSize originalSize, ImageSize newSize) {
 		double newSizeRation = (double) newSize.getHeight() / newSize.getWidth();
 		double originalRatio = 0;
 		
+		int originalHeight = originalSize.getHeight();
+		int originalWidth = originalSize.getWidth();
 		int newWidth = 0;
 		int newHeight = 0;
 		
