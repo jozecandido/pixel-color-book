@@ -36,7 +36,7 @@ public final class Common {
 	}
 	
 	public static ImageSize calculateNewSize(ImageSize originalSize, ImageSize newSize) {
-		double newSizeRation = (double) newSize.getHeight() / newSize.getWidth();
+		double newSizeRatio = (double) newSize.getHeight() / newSize.getWidth();
 		double originalRatio = 0;
 		
 		int originalHeight = originalSize.getHeight();
@@ -47,7 +47,7 @@ public final class Common {
 		// Portrait
 		if (originalHeight >= originalWidth) {
 			originalRatio = (double) originalHeight / originalWidth;
-			if (newSizeRation >= originalRatio) {
+			if (newSizeRatio >= originalRatio) {
 				newWidth = newSize.getWidth();
 				newHeight = (int) Math.round((double) originalHeight / ((double) originalWidth / newSize.getWidth()));
 			} else {
@@ -56,7 +56,7 @@ public final class Common {
 			}
 		} else {	// Landscape
 			originalRatio = (double) originalWidth / originalHeight;
-			if (newSizeRation >= originalRatio) {
+			if (newSizeRatio >= originalRatio) {
 				newHeight = newSize.getWidth();
 				newWidth = (int) Math.round((double) originalWidth / ((double) originalHeight / newSize.getWidth()));
 			} else {

@@ -25,18 +25,58 @@ public class CommonTest {
 		Assert.assertArrayEquals(expecteds, actuals);
 	}
 
-	@Test
-	public void testCalculateNewSizePortrait() {
-		ImageSize originalSize = new ImageSize(1080, 1806);
-		ImageSize size = Common.calculateNewSize(originalSize, DefaultImageSize.LARGE.getSize());
-		Assert.assertEquals(size.getHeight(), DefaultImageSize.LARGE.getSize().getHeight());
-	}
+	// Portrait 1 - High aspect ratio 
 	
 	@Test
-	public void testCalculateNewSizeLandscape() {
-		ImageSize originalSize = new ImageSize(1806, 1080);
-		ImageSize size = Common.calculateNewSize(originalSize, DefaultImageSize.LARGE.getSize());
-		Assert.assertEquals(size.getWidth(), DefaultImageSize.LARGE.getSize().getHeight());
+	public void testCalculateNewSizePortrait1Small() {
+		ImageSize originalSize = new ImageSize(1000, 4000);
+		ImageSize modelSize = DefaultImageSize.SMALL.getSize();
+		ImageSize newSize = Common.calculateNewSize(originalSize, modelSize);
+		Assert.assertEquals(newSize.getHeight(), modelSize.getHeight());
+	}
+	
+	// Portrait 2 - Low aspect ratio 
+	
+	@Test
+	public void testCalculateNewSizePortrait2Medium() {
+		ImageSize originalSize = new ImageSize(3500, 4000);
+		ImageSize modelSize = DefaultImageSize.MEDIUM.getSize();
+		ImageSize newSize = Common.calculateNewSize(originalSize, modelSize);
+		Assert.assertEquals(newSize.getWidth(), modelSize.getWidth());
+	}
+	
+	// Landscape 1 - High aspect ratio 
+	
+	@Test
+	public void testCalculateNewSizeLandscapeLarge() {
+		ImageSize originalSize = new ImageSize(4000, 1000);
+		ImageSize modelSize = DefaultImageSize.LARGE.getSize();
+		ImageSize newSize = Common.calculateNewSize(originalSize, modelSize);
+		Assert.assertEquals(newSize.getWidth(), modelSize.getHeight());
+	}
+	
+	// Landscape 2 - Low aspect ratio 
+	
+	@Test
+	public void testCalculateNewSizeLandscape2Small() {
+		ImageSize originalSize = new ImageSize(4000, 3500);
+		ImageSize modelSize = DefaultImageSize.SMALL.getSize();
+		ImageSize newSize = Common.calculateNewSize(originalSize, modelSize);
+		Assert.assertEquals(newSize.getHeight(), modelSize.getWidth());
+	}
+	
+	// Squared
+	
+	@Test
+	public void testCalculateNewSizeSquared() {
+		ImageSize originalSize = new ImageSize(4000, 4000);
+		ImageSize newSize = null;
+		
+		for (DefaultImageSize modelSize : DefaultImageSize.values()) {
+			newSize = Common.calculateNewSize(originalSize, modelSize.getSize());
+			Assert.assertEquals(newSize.getWidth(), modelSize.getSize().getWidth());
+			Assert.assertEquals(newSize.getHeight(), modelSize.getSize().getWidth());
+		}
 	}
 
 }

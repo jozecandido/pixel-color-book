@@ -26,7 +26,6 @@ public class PcbCore {
 	//DONE: Receber conjunto de lápis 
 	
 	//PRE-PROCESSAMENTO
-	//TODO: processar stream?
 	//TODO: Mudar contraste e saturação
 	//DONE: redimensionar para tamanhos 
 	
