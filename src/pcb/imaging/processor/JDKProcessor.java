@@ -1,10 +1,8 @@
 package pcb.imaging.processor;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -48,28 +46,6 @@ class JDKProcessor extends AbstractImageProcessor {
 
 	@Override
 	ColorImageMapping createColorMapping() throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write(resizedImage, "png", baos);
-		byte[] bytes = baos.toByteArray();
-		
-		ColorImageMapping mapping = new ColorImageMapping(imageFile, paintSize, box);
-		mapping.setResizedImage(bytes);
-		
-		return mapping;
+		return new ColorImageMapping(resizedImage, paintSize, box);
 	}
-
-	@SuppressWarnings("unused")
-	private double distanceTo(Color pixelColor, Color pencilColor) {
-		double redDistance = pixelColor.getRed() - pencilColor.getRed();
-		double greenDistance = pixelColor.getGreen() - pencilColor.getGreen();
-		double blueDistance = pixelColor.getBlue() - pencilColor.getBlue();
-
-		double distanceTo = (redDistance * redDistance) 
-				+ (greenDistance * greenDistance)
-				+ (blueDistance * blueDistance);
-		distanceTo = Math.sqrt(distanceTo);
-
-		return distanceTo;
-	}
-
 }

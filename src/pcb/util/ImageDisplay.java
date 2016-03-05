@@ -49,8 +49,6 @@ public class ImageDisplay extends Component {
 	}
 	
 	public static void displayImage(byte[] array) throws IOException {
-		
-		
 		ImageDisplay display = new ImageDisplay(ImageIO.read(new ByteArrayInputStream(array)));
 		display.display();
 	}

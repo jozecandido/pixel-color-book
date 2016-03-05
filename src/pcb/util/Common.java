@@ -1,10 +1,15 @@
 package pcb.util;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 
 import pcb.model.ImageSize;
 
@@ -66,5 +71,18 @@ public final class Common {
 		}
 		
 		return new ImageSize(newWidth, newHeight);
+	}
+	
+	public static BufferedImage deepCopy(BufferedImage bi) {
+		 ColorModel cm = bi.getColorModel();
+		 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		 WritableRaster raster = bi.copyData(null);
+		 return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+	}
+	
+	public static byte[] toByteArray(BufferedImage buffImage) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(buffImage, "png", baos);
+		return baos.toByteArray();
 	}
 }

@@ -47,13 +47,13 @@ public class PcbCore {
 			ColorImageMapping mapping = processor.processImage(Common.encodeFile(image), box, paintSize.getSize());
 			ColorImageMapping preview = processor.processImage(mapping.getResizedImage(), box, DefaultImageSize.USER.getSize());
 			ImageDisplay.displayImage(preview.getResizedImage());
+			ImageDisplay.displayImage(preview.getPencilImage());
 			
 		} catch (NoPencilBrandException e) {
 			e.printStackTrace();
 		} catch (BoxSizeException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
