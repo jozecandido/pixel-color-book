@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 
 import pcb.model.ImageSize;
 
@@ -13,14 +12,6 @@ public final class Common {
 
 	private static final int BUFFER_SIZE = 8192;
 
-	public static String encondeBase64(byte[] byteArray) {
-		return Base64.getEncoder().encodeToString(byteArray);
-	}
-	
-	public static byte[] decodeBase64(String image) {
-		return Base64.getDecoder().decode(image);
-	}
-	
 	public static byte[] encodeFile(File image) throws IOException {
 		
 		InputStream inputStream = null;
