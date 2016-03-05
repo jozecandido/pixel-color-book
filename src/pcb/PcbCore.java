@@ -1,10 +1,7 @@
 package pcb;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import pcb.exception.BoxSizeException;
 import pcb.exception.NoPencilBrandException;
@@ -12,10 +9,10 @@ import pcb.imaging.ColorImageMapping;
 import pcb.imaging.processor.ColorImageMappingProcessor;
 import pcb.imaging.processor.ImageProcessor;
 import pcb.model.ColorPencilBox;
-import pcb.model.PaintSize;
+import pcb.model.DefaultImageSize;
 import pcb.model.PencilBrand;
 import pcb.model.factory.ColorPencilBoxFactory;
-import pcb.util.Comon;
+import pcb.util.Common;
 import pcb.util.ImageDisplay;
 
 public class PcbCore {
@@ -43,13 +40,13 @@ public class PcbCore {
 	//DONE: Exibir imagem
 	//TODO: Gerar PDF	
 	
-	public void createDrawing(File image, PaintSize paintSize, int boxSize, PencilBrand brand) {
+	public void createDrawing(File image, DefaultImageSize paintSize, int boxSize, PencilBrand brand) {
 
 		try {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
 			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
-			ColorImageMapping mapping = processor.processImage(Comon.encodeFile(image), box, paintSize);
-			ColorImageMapping preview = processor.processImage(mapping.getResizedImage(), box, PaintSize.USER);
+			ColorImageMapping mapping = processor.processImage(Common.encodeFile(image), box, paintSize.getSize());
+			ColorImageMapping preview = processor.processImage(mapping.getResizedImage(), box, DefaultImageSize.USER.getSize());
 			ImageDisplay.displayImage(preview.getResizedImage());
 			
 		} catch (NoPencilBrandException e) {
@@ -86,7 +83,7 @@ public class PcbCore {
 		}
 		
 		new PcbCore().createDrawing(new File(pathImage),
-				PaintSize.valueOf(paintSize), 
+				DefaultImageSize.valueOf(paintSize), 
 				Integer.parseInt(pencilBoxSize),
 				PencilBrand.valueOf(brand));
 	}

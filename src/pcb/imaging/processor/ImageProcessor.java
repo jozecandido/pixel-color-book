@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import pcb.imaging.ColorImageMapping;
 import pcb.model.ColorPencilBox;
-import pcb.model.PaintSize;
+import pcb.model.ImageSize;
 
 public interface ImageProcessor {
-	public ColorImageMapping processImage(byte[] image, ColorPencilBox pencilBox, PaintSize paintSize) throws IOException;
+	public ColorImageMapping processImage(byte[] image, ColorPencilBox pencilBox, ImageSize paintSize) throws IOException;
 }

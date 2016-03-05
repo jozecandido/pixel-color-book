@@ -1,7 +1,7 @@
 package pcb.imaging;
 
 import pcb.model.ColorPencilBox;
-import pcb.model.PaintSize;
+import pcb.model.ImageSize;
 
 public class ColorImageMapping {
 
@@ -9,10 +9,10 @@ public class ColorImageMapping {
 	byte[] resizedImage;
 	int[][] mapping;
 	
-	PaintSize size;
+	ImageSize size;
 	ColorPencilBox box;
 	
-	public ColorImageMapping(byte[] original, PaintSize size, ColorPencilBox box) {
+	public ColorImageMapping(byte[] original, ImageSize size, ColorPencilBox box) {
 		this.originalImage = original;
 		this.size = size;
 		this.box = box;
@@ -42,11 +42,11 @@ public class ColorImageMapping {
 		this.mapping = mapping;
 	}
 
-	public PaintSize getSize() {
+	public ImageSize getSize() {
 		return size;
 	}
 
-	public void setSize(PaintSize size) {
+	public void setSize(ImageSize size) {
 		this.size = size;
 	}
 

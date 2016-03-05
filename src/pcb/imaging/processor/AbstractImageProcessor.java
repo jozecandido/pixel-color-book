@@ -4,16 +4,16 @@ import java.io.IOException;
 
 import pcb.imaging.ColorImageMapping;
 import pcb.model.ColorPencilBox;
-import pcb.model.PaintSize;
+import pcb.model.ImageSize;
 
 abstract class AbstractImageProcessor implements ImageProcessor{
 		
 	byte[] imageFile;
 	ColorPencilBox box;
-	PaintSize paintSize;
+	ImageSize paintSize;
 	
 	@Override
-	public ColorImageMapping processImage(byte[] image, ColorPencilBox pencilBox, PaintSize paintSize) throws IOException {
+	public ColorImageMapping processImage(byte[] image, ColorPencilBox pencilBox, ImageSize paintSize) throws IOException {
 		this.imageFile = image;
 		this.paintSize = paintSize;
 		this.box = pencilBox;

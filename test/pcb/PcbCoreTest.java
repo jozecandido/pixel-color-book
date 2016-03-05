@@ -6,7 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import pcb.model.PaintSize;
+import pcb.model.DefaultImageSize;
+import pcb.model.ImageSize;
 import pcb.model.PencilBrand;
 
 public class PcbCoreTest {
@@ -23,7 +24,7 @@ public class PcbCoreTest {
 	@Test
 	public void testImageSample1_LARGE_60_FaberCastell() throws InterruptedException {
 		new PcbCore().createDrawing(
-				new File("res/sample1.jpg"), PaintSize.LARGE, 60, PencilBrand.FaberCastell);
+				new File("res/sample1.jpg"), DefaultImageSize.LARGE, 60, PencilBrand.FaberCastell);
 	}
 
 }
