@@ -6,7 +6,10 @@ import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class ImageDisplay extends Component {
@@ -45,8 +48,10 @@ public class ImageDisplay extends Component {
 		f.setVisible(true);
 	}
 	
-	public static void displayImage(BufferedImage bufferedImage) {
-		ImageDisplay display = new ImageDisplay(bufferedImage);
+	public static void displayImage(byte[] array) throws IOException {
+		
+		
+		ImageDisplay display = new ImageDisplay(ImageIO.read(new ByteArrayInputStream(array)));
 		display.display();
 	}
 }

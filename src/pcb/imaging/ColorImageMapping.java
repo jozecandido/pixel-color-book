@@ -1,30 +1,62 @@
 package pcb.imaging;
 
-import java.awt.image.BufferedImage;
+import pcb.model.ColorPencilBox;
+import pcb.model.PaintSize;
 
 public class ColorImageMapping {
 
-	private BufferedImage resizedImage;
-	private BufferedImage userImage;
-
-	public ColorImageMapping(BufferedImage resizedImage, BufferedImage userImage) {
-		this.resizedImage = resizedImage;
-		this.setUserImage(userImage);
-	}
+	byte[] originalImage;
+	byte[] resizedImage;
+	int[][] mapping;
 	
-	public BufferedImage getResizedImage() {
+	PaintSize size;
+	ColorPencilBox box;
+	
+	public ColorImageMapping(byte[] original, PaintSize size, ColorPencilBox box) {
+		this.originalImage = original;
+		this.size = size;
+		this.box = box;
+	}
+
+	public byte[] getOriginalImage() {
+		return originalImage;
+	}
+
+	public void setOriginalImage(byte[] originalImage) {
+		this.originalImage = originalImage;
+	}
+
+	public byte[] getResizedImage() {
 		return resizedImage;
 	}
 
-	public void setResizedImage(BufferedImage resizedImage) {
+	public void setResizedImage(byte[] resizedImage) {
 		this.resizedImage = resizedImage;
 	}
 
-	public BufferedImage getUserImage() {
-		return userImage;
+	public int[][] getMapping() {
+		return mapping;
 	}
 
-	public void setUserImage(BufferedImage userImage) {
-		this.userImage = userImage;
+	public void setMapping(int[][] mapping) {
+		this.mapping = mapping;
 	}
+
+	public PaintSize getSize() {
+		return size;
+	}
+
+	public void setSize(PaintSize size) {
+		this.size = size;
+	}
+
+	public ColorPencilBox getBox() {
+		return box;
+	}
+
+	public void setBox(ColorPencilBox box) {
+		this.box = box;
+	}
+	
+	
 }

@@ -1,40 +1,34 @@
 package pcb.imaging.processor;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import pcb.imaging.ColorImageMapping;
 import pcb.model.ColorPencilBox;
 import pcb.model.PaintSize;
 
-public abstract class AbstractImageProcessor implements ImageProcessor{
+abstract class AbstractImageProcessor implements ImageProcessor{
 		
-	File imageFile;
-	ColorPencilBox pencilBox;
+	byte[] imageFile;
+	ColorPencilBox box;
 	PaintSize paintSize;
 	
 	@Override
-	public ColorImageMapping processImage(File imageFile, ColorPencilBox pencilBox, PaintSize paintSize) {
-		this.imageFile = imageFile;
-		this.pencilBox = pencilBox;
+	public ColorImageMapping processImage(byte[] image, ColorPencilBox pencilBox, PaintSize paintSize) throws IOException {
+		this.imageFile = image;
 		this.paintSize = paintSize;
+		this.box = pencilBox;
+		
 		preProcess();
 		adjustContrastAndSaturation();
 		resize();
-		genaretePreview();
 		return createColorMapping();
 	}
 	
-	abstract void preProcess();
+	abstract void preProcess() throws IOException;
 
-	abstract String resize();
+	abstract void resize();
 
 	abstract void adjustContrastAndSaturation();
-	
-	abstract void generatePreview();
-	
-	abstract ColorImageMapping createColorMapping();
+		
+	abstract ColorImageMapping createColorMapping() throws IOException;
 }

@@ -3,33 +3,27 @@ package pcb.imaging.processor;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
 import pcb.imaging.ColorImageMapping;
-import pcb.model.PaintSize;
 
 class JDKProcessor extends AbstractImageProcessor {
 
-	BufferedImage originalImage = null;
-	
+	BufferedImage buffImage = null;
+	BufferedImage resizedImage = null;
 	@Override
-	void preProcess() {
-		try {
-			originalImage = ImageIO.read(imageFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	void preProcess() throws IOException {
+		buffImage = ImageIO.read(new ByteArrayInputStream(imageFile));
 	}
 
 	@Override
-	String resize() {
-		int originalWidth = originalImage.getWidth();
-		int originalHeight = originalImage.getHeight();
+	void resize() {
+		int originalWidth = buffImage.getWidth();
+		int originalHeight = buffImage.getHeight();
 		
 		double paintSizeRatio = (double) paintSize.getHeight() / paintSize.getWidth();
 		double originalRatio = 0;
@@ -58,19 +52,9 @@ class JDKProcessor extends AbstractImageProcessor {
 			}
 		}
 		
-		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-		BufferedImage resizedImage = resizeImage(originalImage, type, newWidth, newHeight);
+		int type = buffImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : buffImage.getType();
+		resizedImage = resizeImage(buffImage, type, newWidth, newHeight);
 		
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		try {
-			ImageIO.write(resizedImage, "jpg", baos);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		byte[] bytes = baos.toByteArray();
-		
-		return Base64.getEncoder().encodeToString(bytes);
 	}
 	
 	private BufferedImage resizeImage(BufferedImage originalImage, int type, int width, int height){
@@ -94,8 +78,15 @@ class JDKProcessor extends AbstractImageProcessor {
 	}
 
 	@Override
-	ColorImageMapping createColorMapping() {
-		return new ColorImageMapping(resizedImage, userImage);
+	ColorImageMapping createColorMapping() throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(resizedImage, "png", baos);
+		byte[] bytes = baos.toByteArray();
+		
+		ColorImageMapping mapping = new ColorImageMapping(imageFile, paintSize, box);
+		mapping.setResizedImage(bytes);
+		
+		return mapping;
 	}
 
 	@SuppressWarnings("unused")
@@ -111,4 +102,5 @@ class JDKProcessor extends AbstractImageProcessor {
 
 		return distanceTo;
 	}
+
 }

@@ -1,6 +1,10 @@
 package pcb;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import pcb.exception.BoxSizeException;
 import pcb.exception.NoPencilBrandException;
@@ -11,6 +15,7 @@ import pcb.model.ColorPencilBox;
 import pcb.model.PaintSize;
 import pcb.model.PencilBrand;
 import pcb.model.factory.ColorPencilBoxFactory;
+import pcb.util.Comon;
 import pcb.util.ImageDisplay;
 
 public class PcbCore {
@@ -43,12 +48,16 @@ public class PcbCore {
 		try {
 			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
 			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
-			ColorImageMapping mapping = processor.processImage(image, box, paintSize);
-			ImageDisplay.displayImage(mapping.getUserImage());
+			ColorImageMapping mapping = processor.processImage(Comon.encodeFile(image), box, paintSize);
+			ColorImageMapping preview = processor.processImage(mapping.getResizedImage(), box, PaintSize.USER);
+			ImageDisplay.displayImage(preview.getResizedImage());
 			
 		} catch (NoPencilBrandException e) {
 			e.printStackTrace();
 		} catch (BoxSizeException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
