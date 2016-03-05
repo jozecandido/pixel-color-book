@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pcb.model.DefaultImageSize;
-import pcb.model.ImageSize;
 import pcb.model.PencilBrand;
 
 public class PcbCoreTest {
