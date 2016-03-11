@@ -1,7 +1,5 @@
 package pcb.model;
 
-import java.awt.Color;
-
 public class Pencil implements Comparable<Pencil> {
 
 	private int number;

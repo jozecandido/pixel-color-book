@@ -1,15 +1,16 @@
 package pcb;
 
 import java.io.File;
-import java.io.IOException;
 
 import pcb.exception.BoxSizeException;
 import pcb.exception.NoPencilBrandException;
+import pcb.exception.PcbException;
 import pcb.imaging.ColorImageMapping;
-import pcb.imaging.processor.ColorImageMappingProcessor;
+import pcb.imaging.mapping.MappingProcessor;
 import pcb.imaging.processor.ImageProcessor;
 import pcb.model.ColorPencilBox;
 import pcb.model.DefaultImageSize;
+import pcb.model.MappedImage;
 import pcb.model.PencilBrand;
 import pcb.model.factory.ColorPencilBoxFactory;
 import pcb.util.Common;
@@ -42,27 +43,38 @@ public class PcbCore {
 	public void createDrawing(File image, DefaultImageSize paintSize, int boxSize, PencilBrand brand) {
 
 		try {
-			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
-			ImageProcessor processor = ColorImageMappingProcessor.getCurrentProcessor();
-			ColorImageMapping mapping = processor.processImage(Common.encodeFile(image), box, paintSize.getSize());
-			ColorImageMapping preview = processor.processImage(mapping.getResizedImage(), box, DefaultImageSize.USER.getSize());
+			ImageProcessor processor = ImageProcessor.getCurrentProcessor();
+			ColorImageMapping mapping = processor.processImage(Common.encodeFile(image), paintSize.getSize());
+			ColorImageMapping preview = processor.processImage(mapping.getResizedImage(), DefaultImageSize.USER.getSize());
 			ImageDisplay.displayImage(preview.getResizedImage());
-			ImageDisplay.displayImage(preview.getPencilImage());
+			
+			ColorPencilBox box = ColorPencilBoxFactory.createBox(boxSize, brand);
+			MappingProcessor mapper = MappingProcessor.getCurrentProcessor();
+			MappedImage mapped = mapper.processMapping(preview, box);			
+			ImageDisplay.displayImage(mapped.getPencilImage());
 			
 		} catch (NoPencilBrandException e) {
 			e.printStackTrace();
 		} catch (BoxSizeException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (PcbException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
-		new PcbCore().createDrawing(
-				new File("res/sample2.jpg"), 
+		PcbCore pcb = new PcbCore();
+		pcb.createDrawing(
+				new File("res/sample1.jpg"), 
 				DefaultImageSize.LARGE, 
 				60, 
+				PencilBrand.FaberCastell);
+		pcb.createDrawing(
+				new File("res/sample1.jpg"), 
+				DefaultImageSize.LARGE, 
+				24, 
 				PencilBrand.FaberCastell);
 	}
 }

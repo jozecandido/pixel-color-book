@@ -18,6 +18,70 @@ public class ColorPencilBox {
 		this.pencils = pencils;
 	}
 	
+	public Pencil getPencil(int clr) {
+        Color pixelColor = new Color(clr);
+        
+        double smallestDistance = 99999; 
+        Pencil bestPencil = null;
+        List<Pencil> pencils = this.getPencils();
+        for (Pencil pencil : pencils) {
+			double distance = distanceTo(pixelColor, pencil.getColor());
+			if (distance < smallestDistance) {
+				smallestDistance = distance;
+				bestPencil = pencil;
+			}
+		}
+        
+		return bestPencil;
+	}
+	
+	public Pencil getPencilLab(int clr) {
+        Color pixelColor = new Color(clr);
+        
+        double smallestDistance = 99999; 
+        Pencil bestPencil = null;
+        List<Pencil> pencils = this.getPencils();
+        for (Pencil pencil : pencils) {
+        	pixelColor.convertToLab();
+        	pencil.getColor().convertToLab();
+			double distance = distanceToLab(pixelColor, pencil.getColor());
+			if (distance < smallestDistance) {
+				smallestDistance = distance;
+				bestPencil = pencil;
+			}
+		}
+        
+		return bestPencil;
+	}
+	
+	private double distanceTo(Color pixelColor, Color pencilColor) {
+		double redDistance = pixelColor.getRed() - pencilColor.getRed();
+		double greenDistance = pixelColor.getGreen() - pencilColor.getGreen();
+		double blueDistance = pixelColor.getBlue() - pencilColor.getBlue();
+
+		double distanceTo = (redDistance * redDistance) 
+				+ (greenDistance * greenDistance)
+				+ (blueDistance * blueDistance);
+		distanceTo = Math.sqrt(distanceTo);
+
+		return distanceTo;
+	}
+	
+	private double distanceToLab(Color pixelColor, Color pencilColor) {
+		
+		
+		double redDistance = pixelColor.getL() - pencilColor.getL();
+		double greenDistance = pixelColor.getB() - pencilColor.getB();
+		double blueDistance = pixelColor.getA() - pencilColor.getA();
+
+		double distanceTo = (redDistance * redDistance) 
+				+ (greenDistance * greenDistance)
+				+ (blueDistance * blueDistance);
+		distanceTo = Math.sqrt(distanceTo);
+
+		return distanceTo;
+	}
+	
 	public int getSize() {
 		return pencils != null ? pencils.size() : 0;
 	}

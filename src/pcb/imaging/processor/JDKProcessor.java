@@ -46,6 +46,11 @@ class JDKProcessor extends AbstractImageProcessor {
 
 	@Override
 	ColorImageMapping createColorMapping() throws IOException {
-		return new ColorImageMapping(resizedImage, paintSize, box);
+		ColorImageMapping imageMapping = new ColorImageMapping();
+		imageMapping.setOriginalImage(Common.toByteArray(buffImage));
+		imageMapping.setResizedImage(Common.toByteArray(resizedImage));
+		imageMapping.setSize(paintSize);
+		
+		return imageMapping;
 	}
 }
