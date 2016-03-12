@@ -4,16 +4,16 @@ import pcb.model.ColorPencilBox;
 
 public class MappedImage {
 	private byte[] pencilImage;
-	private int[][] pencilNumberMapping;
+	private String[][] pencilNumberMapping;
 	private String[][] colorMapping;
 	private ColorPencilBox box;
 
 	
-	public int[][] getPencilNumberMapping() {
+	public String[][] getPencilNumberMapping() {
 		return pencilNumberMapping;
 	}
 
-	public void setPencilNumberMapping(int[][] mapping) {
+	public void setPencilNumberMapping(String[][] mapping) {
 		this.pencilNumberMapping = mapping;
 	}
 	
