@@ -2,8 +2,8 @@ package pcb.imaging.mapping;
 
 import pcb.exception.PcbException;
 import pcb.imaging.ColorImageMapping;
+import pcb.imaging.MappedImage;
 import pcb.model.ColorPencilBox;
-import pcb.model.MappedImage;
 
 public interface MappingProcessor {
 
