@@ -1,22 +1,19 @@
-package pcb.imaging.processor;
+package pcb.core.imaging.processor;
 
 import java.io.IOException;
 
-import pcb.imaging.ColorImageMapping;
-import pcb.model.ColorPencilBox;
-import pcb.model.ImageSize;
+import pcb.core.imaging.ColorImageMapping;
+import pcb.core.model.ImageSize;
 
 abstract class AbstractImageProcessor implements ImageProcessor{
 		
 	byte[] imageFile;
-	ColorPencilBox box;
 	ImageSize paintSize;
 	
 	@Override
-	public ColorImageMapping processImage(byte[] image, ColorPencilBox pencilBox, ImageSize paintSize) throws IOException {
+	public ColorImageMapping processImage(byte[] image, ImageSize paintSize) throws IOException {
 		this.imageFile = image;
 		this.paintSize = paintSize;
-		this.box = pencilBox;
 		
 		preProcess();
 		adjustContrastAndSaturation();
